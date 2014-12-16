@@ -1,5 +1,5 @@
-transform    = require 'coffee-react-transform'
-coffeescript = require 'coffee-script'
+transform = require('coffee-react-transform')
+coffeescript = require('coffee-script')
 
 module.exports = class ReactCoffeeCompiler
   brunchPlugin: yes
@@ -8,16 +8,12 @@ module.exports = class ReactCoffeeCompiler
   pattern: /\.cjsx/
 
   constructor: (@config) ->
-    @includeHeader= @config?.plugins?.reactCoffee?.autoIncludeCommentBlock is yes
 
   compile: (params, callback) ->
-    source = if @includeHeader
-        "/** @cjsx React.DOM */\n#{ params.data }"
-      else
-        params.data
-
+    source = params.data
+    options = {bare: true}
     try
-      transformed = coffeescript.compile transform(source)
+      transformed = coffeescript.compile(transform(source), options)
     catch err
       console.log "ERROR: ", err
       return callback err.toString()
