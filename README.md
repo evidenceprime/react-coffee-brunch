@@ -2,29 +2,6 @@
 Adds [React](http://facebook.github.io/react) support to [brunch](http://brunch.io)
 by automatically compiling `*.cjsx` files.
 
-### Optional
-
-You can configure react-brunch to automatically insert a react header
-(`/** @cjsx React.DOM */`) into all `*.cjsx` files. Disabled by default.
-
-Example `config.coffee`:
-
-```coffeescript
-exports.config =
-  plugins:
-    reactCoffee:
-      autoIncludeCommentBlock: yes
-
-  # Usual brunch config stuf...
-  files:
-    javascripts:
-      joinTo: 'app.js'
-    stylesheets:
-      joinTo: 'app.css'
-    templates:
-      joinTo: 'app.js'
-```
-
 ### Notes
 
 react-coffee-brunch only supports compiling `*.cjsx` files.
@@ -34,7 +11,7 @@ Install the plugin via npm with `npm install --save react-coffee-brunch`.
 
 Or, do manual install:
 
-* Add `"react-brunch": "x.y.z"` to `package.json` of your brunch app.
+* Add `"react-coffee-brunch": "x.y.z"` to `package.json` of your brunch app.
   Pick a plugin version that corresponds to your minor (y) brunch version.
 * If you want to use git version of plugin, add
 `"react-brunch": "git+ssh://git@github.com:brunch/react-brunch.git"`.
