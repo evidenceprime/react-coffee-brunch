@@ -15,7 +15,8 @@ module.exports = class ReactCoffeeCompiler
     try
       transformed = coffeescript.compile(transform(params.data), options)
     catch err
-      if err.location
+      loc = err.location
+      if loc
         error = loc.first_line + ":" + loc.first_column + " " + (err.toString())
       else
         error = err.toString()
