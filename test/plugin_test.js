@@ -3,6 +3,7 @@ describe('Plugin', function() {
 
   beforeEach(function() {
     plugin = new Plugin({});
+    plugin2 = new Plugin({sourceMaps: true})
   });
 
   it('should be an object', function() {
@@ -36,5 +37,33 @@ describe('Plugin', function() {
       done();
     });
   });
+
+
+  it('should not respect arguments to not generate source maps', function(done) {
+    var content = 'div = <div></div>';
+    var expected = 'var div;\n\ndiv = React.createElement(\"div\", null);\n';
+
+    plugin.compile({data: content, path: 'file.cjsx'}, function(error, result) {
+      var data = (result || {});
+      expect(error).not.to.be.ok;
+      expect(data.map).to.not.exist;
+      expect(data.data).to.equal(expected);
+      done();
+    });
+  });
+
+  it('should not respect arguments to generate source maps', function(done) {
+    var content = 'div = <div></div>';
+    var expected = 'var div;\n\ndiv = React.createElement(\"div\", null);\n';
+
+    plugin2.compile({data: content, path: 'file.cjsx'}, function(error, result) {
+      var data = (result || {});
+      expect(error).not.to.be.ok;
+      expect(data.map).to.exist;
+      expect(data.data).to.equal(expected);
+      done();
+    });
+  });
+
 
 });
