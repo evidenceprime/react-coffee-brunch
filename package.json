@@ -1,6 +1,6 @@
 {
   "name": "react-coffee-brunch",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "description": "Adds React.js-in-Coffeescript support to brunch.",
   "author": "Matt McCray",
   "license": "MIT",
@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "react-tools": "~0.12.1",
+    "coffee-script": "~1.8.0",
     "coffee-react-transform": "~2.1.0"
   },
   "devDependencies": {

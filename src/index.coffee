@@ -7,15 +7,26 @@ module.exports = class ReactCoffeeCompiler
   extension: 'cjsx'
   pattern: /\.cjsx/
 
-  constructor: (@config) ->
+  constructor: (@config = {}) ->
+    @sourceMap = !!@config.sourceMaps || false
 
   compile: (params, callback) ->
-    source = params.data
-    options = {bare: true}
+    options = {bare: true, @sourceMap, sourceFiles: [params.path]}
     try
-      transformed = coffeescript.compile(transform(source), options)
+      transformed = coffeescript.compile(transform(params.data), options)
     catch err
-      console.log "ERROR: ", err
-      return callback err.toString()
+      loc = err.location
+      if loc
+        error = loc.first_line + ":" + loc.first_column + " " + (err.toString())
+      else
+        error = err.toString()
+      return callback error
 
-    callback null, data: transformed
+    if @sourceMap
+      data =
+        data: transformed.js
+        map: transformed.v3SourceMap
+    else
+      data = {data: transformed}
+
+    callback null, data
