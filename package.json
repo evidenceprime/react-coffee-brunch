@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "coffee-script": "~1.9.3",
-    "coffee-react-transform": "~3.2.0"
+    "coffee-react-transform": "~4.0.0"
   },
   "devDependencies": {
     "mocha": "1.11.0",
